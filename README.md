@@ -13,3 +13,11 @@
 - if the grid is full and no player line up 4 pawns, the game is a draw
 - each player has a special pawn which can be used to reverse the column
 - the special pawn can be used only once per game
+
+## TO DO
+
+- IA
+- token reverse
+- diagonale
+- draw
+- barrer la ligne gagnante

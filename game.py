@@ -23,9 +23,12 @@ class Game:
     
     def set_grid(self, grid):
         self.grid = grid
+
+    def columnFull(self, column):
+        return self.grid[column].count(None) <= 0
     
     def insert(self, column, player):
-        if(self.grid[column].count(None) <= 0):
+        if(self.columnFull(column)):
             raise Exception("Column ", str(column), " is full")
         x = self.grid[column].index(None)
         self.grid[column][x] = player.get_char()
