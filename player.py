@@ -11,3 +11,9 @@ class Player:
     
     def set_tokenFalse(self):
         self.token = False
+    
+    def set_tokenTrue(self):
+        self.token = True
+    
+    def verify_token_error(self, input):
+        return len(input)>1 and (input[1] == 'R' or input[1] == 'r') and not self.get_token()
