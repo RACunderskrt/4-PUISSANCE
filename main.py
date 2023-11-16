@@ -34,7 +34,7 @@ def play_game():
                 print(Color.ERROR + "Invalid input. Please enter a number between 1 and 7." + Color.END)
                 error = True
         print()
-        Display.clear_line(11+error)
+        Display.clear_line(12+error)
         g1.insert(column - 1, active_player)
         Display.animation(g1, column - 1)
         Display.clear_line(9)
