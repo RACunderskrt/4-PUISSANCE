@@ -19,5 +19,4 @@
 - IA
 - token reverse
 - diagonale
-- draw
 - barrer la ligne gagnante

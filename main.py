@@ -3,7 +3,7 @@ from player import Player
 from display import Display, Color
 
 def play_game():
-    print("Jeu de puissance 4", end="\n\n")
+    print("Aligne 4 jetons et la victoire est à toi", end="\n\n")
     p1 = Player("A")
     p2 = Player("B")
     active_player = None
@@ -13,7 +13,7 @@ def play_game():
 
     Display.display(grid)
 
-    while not g1.verify_all():
+    while not g1.verify_all() and not g1.grid_full():
         active_player = p2 if active_player == p1 else p1
         print("Player " + active_player.get_char())
         column = None
@@ -34,7 +34,7 @@ def play_game():
                 print(Color.ERROR + "Invalid input. Please enter a number between 1 and 7." + Color.END)
                 error = True
         print()
-        Display.clear_line(12+error)
+        Display.clear_line(11+error)
         g1.insert(column - 1, active_player)
         Display.animation(g1, column - 1)
         Display.clear_line(9)
@@ -43,9 +43,10 @@ def play_game():
     if g1.verify_all():
         print(Color.WIN + "Player " + active_player.get_char() + " won" + Color.END)
     else:
-        print("Draw")
+        print(Color.DRAW + "Draw" + Color.END)
 
 def main():
+    Display.menu()
     play_game()
 
 if __name__ == '__main__':

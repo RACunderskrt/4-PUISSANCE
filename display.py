@@ -1,4 +1,4 @@
-import copy, time
+import copy, time, threading
 
 class Display:
     
@@ -37,13 +37,35 @@ class Display:
             Display.clear_line(9) if top != 5 else None
             top -=1
             Display.display(bufGrid)
-            time.sleep(0.25)
+            time.sleep(0.1)
 
+    def displayMenu():
+        print("               Press Enter")
+        time.sleep(0.5)
+        Display.clear_line()
+        print("")
+        Display.clear_line()
+        time.sleep(0.5)
+    
+    def inputKb(value):
+        input()
+        value.append(True)
+
+    def menu():
+        menu = open("menu.txt","r").read()
+        print(menu)
+        a_list = []
+        x = threading.Thread(target=Display.inputKb, args=(a_list,))
+        x.start()
+        while not a_list:
+            Display.displayMenu()
+        Display.clear_line(8)
 
 class Color:
         PLAYER_A = '\033[91m' # red
         PLAYER_B = '\033[93m' # yellow
         GRID = '\033[94m' # blue
         WIN = '\033[92m' # green
+        DRAW = '\033[95m' # purple
         ERROR = '\033[33m' # orange
         END = '\033[0m' # end color

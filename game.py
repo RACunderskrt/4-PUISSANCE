@@ -36,6 +36,9 @@ class Game:
 
     def verify_all(self):
         return self.verify(self.grid_horizontal) or self.verify(self.grid)
+    
+    def grid_full(self):
+        return not any(None in column for column in self.grid)
 
     def verify(self, arr):
         for next_arr in arr:
