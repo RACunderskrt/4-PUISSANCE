@@ -16,7 +16,13 @@
 
 ## TO DO
 
-- IA
 - token reverse
 - diagonale
+
+## MAYBE TO DO
+
+- menu avec options
+- choix des noms des joueurs
+- IA
 - barrer la ligne gagnante
+- afficher un écran de fin

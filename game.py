@@ -8,6 +8,9 @@ class Game:
         self.grid_horizontal = [[None for i in range(7)] for j in range(6)]
         self.grid_diagonal_left = []
         self.grid_diagonal_right = []
+        grid_diagonal_left = [[None for _ in range(i)] for i in range(4,7)]
+        self.grid_diagonal_left = grid_diagonal_left + grid_diagonal_left[::-1]
+        self.grid_diagonal_right = self.grid_diagonal_left.copy()
 
     def get_grid(self):
         return self.grid

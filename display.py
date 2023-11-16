@@ -13,10 +13,10 @@ class Display:
             print(Color.GRID + "|" + Color.END, end="")
             for row in range(len(grid)):
                 cell = grid[row][col]
-                print(" " if cell is None else Color.PLAYER_A + "O" if cell == "A" else Color.PLAYER_B + "O" if cell == "B" else Color.ERROR + cell, end=Color.GRID + "|" + Color.END)
+                print("  " if cell is None else Color.PLAYER_A + "🔴" if cell == "A" else Color.PLAYER_B + "🟡" if cell == "B" else Color.ERROR + cell, end=Color.GRID + "|" + Color.END)
             print()
-        print(Color.GRID + "---------------" + Color.END)
-        print(" 1 2 3 4 5 6 7")
+        print(Color.GRID + "----------------------" + Color.END)
+        print(" １ ２ ３ ４ ５ ６ ７")
         print()
 
     def animation(game,column):
