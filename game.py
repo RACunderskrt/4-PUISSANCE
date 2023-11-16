@@ -1,3 +1,5 @@
+import copy
+
 from player import Player
 
 class Game:
@@ -9,8 +11,8 @@ class Game:
         self.grid_diagonal_left = []
         self.grid_diagonal_right = []
         grid_diagonal_left = [[None for _ in range(i)] for i in range(4,7)]
-        self.grid_diagonal_left = grid_diagonal_left + grid_diagonal_left[::-1]
-        self.grid_diagonal_right = self.grid_diagonal_left.copy()
+        self.grid_diagonal_left = copy.deepcopy(grid_diagonal_left) + copy.deepcopy(grid_diagonal_left[::-1])
+        self.grid_diagonal_right = copy.deepcopy(self.grid_diagonal_left)
 
     def get_grid(self):
         return self.grid
@@ -36,6 +38,12 @@ class Game:
         x = self.grid[column].index(None)
         self.grid[column][x] = player.get_char()
         self.grid_horizontal[x][column] = player.get_char()
+        index_left = column + x - 3
+        index_right = x - column + 3
+        if 0 <= index_left < 6:
+            self.grid_diagonal_left[index_left][x if index_left < 4 else 6-column] = player.get_char()
+        if 0 <= index_right < 6:
+            self.grid_diagonal_right[index_right][x if index_right < 4 else column] = player.get_char()
 
     def verify_all(self):
         return self.verify(self.grid_horizontal) or self.verify(self.grid)
