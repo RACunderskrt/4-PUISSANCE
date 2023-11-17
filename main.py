@@ -1,6 +1,9 @@
 from game import Game
 from player import Player
 from display import Display, Color
+import re
+
+REG = '^[1-7][rR]?$'
 
 def play_game():
     print("Aligne 4 jetons et la victoire est à toi", end="\n\n")
@@ -15,30 +18,47 @@ def play_game():
 
     while not g1.verify_all() and not g1.grid_full():
         active_player = p2 if active_player == p1 else p1
-        print("Player " + active_player.get_char())
-        column = None
+        print("Player " + active_player.get_char(), end='')
+        print(' - Reverse token available') if active_player.get_token() else print('')
+        inputVar = ' '
         error = False
-        while column is None or column < 1 or column > 7 or g1.columnFull(column - 1):
+        column = -1
+        while g1.columnFull(column) or active_player.verify_token_error(inputVar) or not re.search(REG, inputVar):
             try:
-                column = int(input("Enter column (1-7): "))
-                if column < 1 or column > 7:
+                inputVar = str(input("Enter column (1-7): "))
+                if(not len(inputVar)):
+                    raise ValueError()
+                
+                column = int(inputVar[0])-1
+
+                if column < 0 or column > 6:
+                    raise ValueError()
+
+                if g1.columnFull(column):
                     Display.clear_line(1+error)
-                    print("Invalid input. Please enter a number between 1 and 7.")
+                    print(Color.ERROR +"Column is full. Please choose another column." + Color.END)
                     error = True
-                elif g1.columnFull(column - 1):
+
+                if(active_player.verify_token_error(inputVar)):
                     Display.clear_line(1+error)
-                    print("Column is full. Please choose another column.")
+                    print(Color.ERROR + "Reverse token already used. Please choose another column." + Color.END)
                     error = True
+
             except ValueError:
                 Display.clear_line(1+error)
                 print(Color.ERROR + "Invalid input. Please enter a number between 1 and 7." + Color.END)
                 error = True
         print()
         Display.clear_line(12+error)
-        g1.insert(column - 1, active_player)
-        Display.animation(g1, column - 1)
+        g1.insert(column, active_player)
+        Display.animation(g1, column)
         Display.clear_line(9)
         Display.display(grid)
+        if(len(inputVar)>1 and (inputVar[1] == 'R' or inputVar[1] == 'r')):
+            g1.reverse(column)
+            active_player.set_tokenFalse()
+            Display.clear_line(9)
+            Display.display(grid)
 
     if g1.verify_all():
         print(Color.WIN + "Player " + active_player.get_char() + " won" + Color.END)
@@ -48,6 +68,7 @@ def play_game():
 def main():
     Display.menu()
     play_game()
+
 
 if __name__ == '__main__':
     main()

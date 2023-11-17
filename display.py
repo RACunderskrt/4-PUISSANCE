@@ -40,7 +40,7 @@ class Display:
             time.sleep(0.1)
 
     def displayMenu():
-        print("               Press Enter")
+        print(Color.GRID+"               Press Enter"+Color.END)
         time.sleep(0.5)
         Display.clear_line()
         print("")

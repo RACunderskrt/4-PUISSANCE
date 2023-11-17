@@ -46,7 +46,7 @@ class Game:
             self.grid_diagonal_right[index_right][x if index_right < 4 else column] = player.get_char()
 
     def verify_all(self):
-        return self.verify(self.grid_horizontal) or self.verify(self.grid)
+        return self.verify(self.grid_horizontal) or self.verify(self.grid) or self.verify(self.grid_diagonal_left) or self.verify(self.grid_diagonal_right)
     
     def grid_full(self):
         return not any(None in column for column in self.grid)
