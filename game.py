@@ -35,6 +35,7 @@ class Game:
     def insert(self, column, player):
         if(self.columnFull(column)):
             raise Exception("Column ", str(column), " is full")
+        
         x = self.grid[column].index(None)
         self.grid[column][x] = player.get_char()
         self.grid_horizontal[x][column] = player.get_char()
@@ -68,6 +69,9 @@ class Game:
         return False
     
     def reverse(self, column):
-        x = self.grid[column].index(None)       
+        if(self.grid[column].count(None)):
+            x = self.grid[column].index(None)
+        else:
+            x = 6     
         bufArr = self.grid[column][0:x]
         self.grid[column][0:x] = bufArr[::-1]

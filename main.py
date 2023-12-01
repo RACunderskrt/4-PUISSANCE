@@ -3,10 +3,12 @@ from player import Player
 from display import Display, Color
 import re
 import random
+import sys
+
 
 REG = '^[1-7][rR]?$'
 
-def play_game():
+def play_game(p1_name="A", p2_name="B"):
     print("Aligne 4 jetons et la victoire est à toi", end="\n\n")
     p1 = Player("A")
     p2 = Player("B")
@@ -34,7 +36,8 @@ def play_game():
 
                 if column < 0 or column > 6:
                     raise ValueError()
-
+                
+                
                 if g1.columnFull(column):
                     Display.clear_line(1+error)
                     print(Color.ERROR +"Column is full. Please choose another column." + Color.END)
@@ -66,7 +69,7 @@ def play_game():
     else:
         print(Color.DRAW + "Draw" + Color.END)
 
-def play_game_solo():
+def play_game_solo(p1_name="A"):
     print("Aligne 4 jetons et la victoire est à toi 1000", end="\n\n")
     p1 = Player("A")
     p2 = Player("B")
@@ -146,7 +149,14 @@ def ia_choice(g1, active_player):
 
 def main():
     Display.menu()
-    play_game_solo()
+    match(len(sys.argv)):
+        case 2:
+            play_game_solo(sys.argv[1])
+        case 3:
+            play_game(sys.argv[1], sys.argv[2])
+        case _:
+            play_game()
+
 
 
 if __name__ == '__main__':
