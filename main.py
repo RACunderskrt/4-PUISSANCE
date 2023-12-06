@@ -8,7 +8,7 @@ import sys
 
 REG = '^[1-7][rR]?$'
 
-def play_game(p1_name="A", p2_name="B"):
+def play_game():
     print("Aligne 4 jetons et la victoire est à toi", end="\n\n")
     p1 = Player("A")
     p2 = Player("B")
@@ -69,7 +69,7 @@ def play_game(p1_name="A", p2_name="B"):
     else:
         print(Color.DRAW + "Draw" + Color.END)
 
-def play_game_solo(p1_name="A"):
+def play_game_solo():
     print("Aligne 4 jetons et la victoire est à toi 1000", end="\n\n")
     p1 = Player("A")
     p2 = Player("B")
@@ -149,12 +149,11 @@ def ia_choice(g1, active_player):
 
 def main():
     Display.menu()
-    match(len(sys.argv)):
+    choix = int(Display.choixGM())
+    match(choix):
+        case 1:
+            play_game_solo()
         case 2:
-            play_game_solo(sys.argv[1])
-        case 3:
-            play_game(sys.argv[1], sys.argv[2])
-        case _:
             play_game()
 
 

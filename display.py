@@ -60,6 +60,20 @@ class Display:
         while not a_list:
             Display.displayMenu()
         Display.clear_line(8)
+    
+    def choixGM():
+        menu = open("menu.txt","r").read()
+        choix = open("choixGM.txt","r").read()
+        print(menu)
+        print(choix)
+        while True:
+            gm = input()
+            Display.clear_line()
+            if(gm == "1" or gm == "2"):
+                Display.clear_line(9)
+                return gm
+                
+            
 
 class Color:
         PLAYER_A = '\033[91m' # red
