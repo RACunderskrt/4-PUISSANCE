@@ -19,7 +19,7 @@ class Display:
         print(" １ ２ ３ ４ ５ ６ ７")
         print()
 
-    def animation(game,column):
+    def animation(game,column): #Create a bunch of temporary grid to do the animation
         grid = game.get_grid()
         if(grid[column].count(None) <= 0):
             Display.display(grid)
@@ -39,7 +39,7 @@ class Display:
             Display.display(bufGrid)
             time.sleep(0.1)
 
-    def displayMenu():
+    def displayMenu(): 
         print(Color.GRID+"               Press Enter"+Color.END)
         time.sleep(0.5)
         Display.clear_line()
@@ -47,33 +47,31 @@ class Display:
         Display.clear_line()
         time.sleep(0.5)
     
-    def inputKb(value):
+    def inputKb(value): 
         input()
         value.append(True)
 
-    def menu():
+    def menu(): #Create a menu with a flickering "Press Enter"
         menu = open("menu.txt","r").read()
         print(menu)
         a_list = []
         x = threading.Thread(target=Display.inputKb, args=(a_list,))
         x.start()
         while not a_list:
-            Display.displayMenu()
+            Display.displayMenu() #Display the menu until the thread transform a_list to stop the loop
         Display.clear_line(8)
     
-    def choixGM():
+    def choiceGM():
         menu = open("menu.txt","r").read()
         choix = open("choixGM.txt","r").read()
         print(menu)
         print(choix)
-        while True:
+        while True: #Until the right input, the player need to enter a value
             gm = input()
             Display.clear_line()
             if(gm == "1" or gm == "2"):
                 Display.clear_line(9)
                 return gm
-                
-            
 
 class Color:
         PLAYER_A = '\033[91m' # red

@@ -3,7 +3,7 @@ from player import Player
 from display import Display, Color
 import re
 import random
-import sys
+
 
 
 REG = '^[1-7][rR]?$'
@@ -106,7 +106,7 @@ def play_game_solo():
     else:
         print(Color.DRAW + "Draw" + Color.END)
 
-def test_input(g1, active_player):
+def test_input(g1, active_player): #Check if the input from the player is in the right format
     inputVar = ' '
     error = False
     column = -1
@@ -137,9 +137,9 @@ def test_input(g1, active_player):
             error = True
     return inputVar,column, error
 
-def ia_choice(g1, active_player):
+def ia_choice(g1, active_player): #The ia choose randomly the column and have a 20% chance to use his reverse token if it is still available
     while(True):
-        inputVar = str(random.randrange(1, 7))
+        inputVar = str(random.randrange(1, 7)) 
         column = int(inputVar[0])-1
         if(not g1.columnFull(column)):
             break
@@ -149,7 +149,7 @@ def ia_choice(g1, active_player):
 
 def main():
     Display.menu()
-    choix = int(Display.choixGM())
+    choix = int(Display.choiceGM())
     match(choix):
         case 1:
             play_game_solo()

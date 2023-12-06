@@ -36,7 +36,7 @@ class Game:
         if(self.columnFull(column)):
             raise Exception("Column ", str(column), " is full")
         
-        x = self.grid[column].index(None)
+        x = self.grid[column].index(None) #insert the new token inside each grid
         self.grid[column][x] = player.get_char()
         self.grid_horizontal[x][column] = player.get_char()
         index_left = column + x - 3
@@ -52,7 +52,7 @@ class Game:
     def grid_full(self):
         return not any(None in column for column in self.grid)
 
-    def verify(self, arr):
+    def verify(self, arr): #Check if in the array there is 4 times in a row the same value
         for next_arr in arr:
             counter = 0
             test_value = next_arr[0]
@@ -68,10 +68,10 @@ class Game:
                     return True
         return False
     
-    def reverse(self, column):
-        if(self.grid[column].count(None)):
+    def reverse(self, column): 
+        if(self.grid[column].count(None)): 
             x = self.grid[column].index(None)
         else:
-            x = 6     
+            x = 6 #if the column is full we reverse all the column
         bufArr = self.grid[column][0:x]
         self.grid[column][0:x] = bufArr[::-1]
