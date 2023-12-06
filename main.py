@@ -110,6 +110,7 @@ def test_input(g1, active_player): #Check if the input from the player is in the
     inputVar = ' '
     error = False
     column = -1
+    
     while not re.search(REG, inputVar) or active_player.verify_token_error(inputVar) or g1.columnFull(column) :
         try:
             inputVar = str(input("Enter column (1-7): "))
@@ -130,6 +131,9 @@ def test_input(g1, active_player): #Check if the input from the player is in the
                 Display.clear_line(1+error)
                 print(Color.ERROR + "Reverse token already used. Please choose another column." + Color.END)
                 error = True
+            
+            if(len(inputVar) > 1 and (inputVar[1] != 'r' or inputVar[1] != 'R')):
+               raise ValueError()
 
         except ValueError:
             Display.clear_line(1+error)
