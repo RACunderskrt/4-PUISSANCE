@@ -1,4 +1,6 @@
                1. Singleplayer
                2. Multiplayer
-               3. Singleplayer
-               4. Multiplayer
+               3. No gaming
+               4. Quit
+
+z: up | s: down | space: select | q: quit

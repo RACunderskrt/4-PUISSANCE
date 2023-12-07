@@ -1,7 +1,12 @@
 import copy, time, threading
+import time
+import keyboard
+import sys
 
 class Display:
     
+    SELECT = 0
+
     def clear_line(n=1):
         LINE_UP = '\033[1A'
         LINE_CLEAR = '\x1b[2K'
@@ -72,6 +77,40 @@ class Display:
             if(gm == "1" or gm == "2"):
                 Display.clear_line(9)
                 return gm
+
+
+    def choiceGM2():
+        menu = open("menu.txt","r").read()
+        print(menu)
+        choixGM = open("choixGM.txt","r").read()
+        print(choixGM)
+        select = 0
+        Display.changeMenu(select)
+        ui = None 
+        while (ui != 'space'):
+            ui = keyboard.read_key(True)
+            match ui:
+                case 'z':
+                    select = (select-1)%4
+                    Display.changeMenu(select)
+                    time.sleep(0.2)
+                case 's':
+                    select = (select+1)%4
+                    Display.changeMenu(select)
+                    time.sleep(0.2)
+                case 'q':
+                    sys.exit()
+        Display.clear_line(13)
+        return select
+
+    def changeMenu(index):
+        Display.clear_line(6)
+        print("          ", '\u2192' if index == 0 else " ", "1. Singleplayer")
+        print("          ", '\u2192' if index == 1 else " ", "2. Multiplayer")
+        print("          ", '\u2192' if index == 2 else " ", "3. No gaming")
+        print("          ", '\u2192' if index == 3 else " ", "4. Quit")
+        print()
+        print("z: up | s: down | space: select | q: quit")
 
 class Color:
         PLAYER_A = '\033[91m' # red

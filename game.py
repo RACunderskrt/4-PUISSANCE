@@ -1,5 +1,4 @@
 import copy
-
 from player import Player
 
 class Game:
