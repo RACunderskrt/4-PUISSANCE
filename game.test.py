@@ -18,14 +18,25 @@ def test_get_player2():
 def test_insert_vertical():
     TEST_VALUE.insert(1,P1)
     TEST_VALUE.insert(1,P1)
-    bufGrid = [[None for i in range(6)],['A','A',None,None,None,None],[None for i in range(6)],[None for i in range(6)],[None for i in range(6)],[None for i in range(6)],[None for i in range(6)]]
+    bufGrid = [[None for _ in range(6)],
+               ['A','A',None,None,None,None],
+               [None for _ in range(6)],
+               [None for _ in range(6)],
+               [None for _ in range(6)],
+               [None for _ in range(6)],
+               [None for _ in range(6)]]
     assert TEST_VALUE.get_grid() == bufGrid
 
 def test_insert_horizontal():
     TEST_VALUE.insert(0,P1)
     TEST_VALUE.insert(2,P1)
-    bufGrid = [['A',None,None,None,None,None],[None for i in range(6)],['A',None,None,None,None,None],[None for i in range(6)],[None for i in range(6)],[None for i in range(6)],[None for i in range(6)]]
-    assert TEST_VALUE.get_grid() == bufGrid
+    bufGrid = [['A',None,'A',None,None,None, None],
+               [None for _ in range(7)],
+               [None for _ in range(7)],
+               [None for _ in range(7)],
+               [None for _ in range(7)],
+               [None for _ in range(7)]]
+    assert TEST_VALUE.get_grid_horizontal() == bufGrid
 
 def test_verify():
     test_arr = [[None,None,None,None,1,1,1,1]]
@@ -33,7 +44,7 @@ def test_verify():
     assert TEST_VALUE.verify(test_arr) and not TEST_VALUE.verify(test_arr1)
 
 def reset_grid():
-    TEST_VALUE.set_grid([[None for i in range(6)] for j in range(7)])
+    TEST_VALUE.reset()
 
 def test_reverse():
     test_arr = [[1,2,3,None,None,None]]

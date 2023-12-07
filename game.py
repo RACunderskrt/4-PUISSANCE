@@ -75,3 +75,10 @@ class Game:
             x = 6 #if the column is full we reverse all the column
         bufArr = self.grid[column][0:x]
         self.grid[column][0:x] = bufArr[::-1]
+    
+    def reset(self):
+        self.grid = [[None for i in range(6)] for j in range(7)]
+        self.grid_horizontal = [[None for i in range(7)] for j in range(6)]
+        grid_diagonal_left = [[None for _ in range(i)] for i in range(4,7)]
+        self.grid_diagonal_left = copy.deepcopy(grid_diagonal_left) + copy.deepcopy(grid_diagonal_left[::-1])
+        self.grid_diagonal_right = copy.deepcopy(self.grid_diagonal_left)
