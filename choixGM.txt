@@ -2,5 +2,3 @@
                2. Multiplayer
                3. No gaming
                4. Quit
-
-z: up | s: down | space: select | q: quit

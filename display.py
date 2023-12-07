@@ -78,7 +78,7 @@ class Display:
                 None
             Display.clear_line()
             if(1 <= gm <= 4 ):
-                Display.clear_line(13)
+                Display.clear_line(12)
                 return gm
 
 
@@ -88,6 +88,7 @@ class Display:
         choixGM = open("choixGM.txt","r").read()
         print(choixGM)
         select = 0
+        Display.clear_line(5)
         Display.changeMenu(select)
         ui = None 
         while (ui != 'space'):
@@ -95,10 +96,12 @@ class Display:
             match ui:
                 case 'z':
                     select = (select-1)%4
+                    Display.clear_line(6)
                     Display.changeMenu(select)
                     time.sleep(0.2)
                 case 's':
                     select = (select+1)%4
+                    Display.clear_line(6)
                     Display.changeMenu(select)
                     time.sleep(0.2)
                 case 'q':
@@ -107,7 +110,6 @@ class Display:
         return select
 
     def changeMenu(index):
-        Display.clear_line(6)
         print("          ", '\u2192' if index == 0 else " ", "1. Singleplayer")
         print("          ", '\u2192' if index == 1 else " ", "2. Multiplayer")
         print("          ", '\u2192' if index == 2 else " ", "3. No gaming")
