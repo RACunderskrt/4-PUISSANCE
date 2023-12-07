@@ -72,10 +72,13 @@ class Display:
         print(menu)
         print(choix)
         while True: #Until the right input, the player need to enter a value
-            gm = input()
+            try:
+                gm = int(input())
+            except ValueError:
+                None
             Display.clear_line()
-            if(gm == "1" or gm == "2"):
-                Display.clear_line(9)
+            if(1 <= gm <= 4 ):
+                Display.clear_line(13)
                 return gm
 
 
