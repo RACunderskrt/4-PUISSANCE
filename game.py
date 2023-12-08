@@ -140,8 +140,8 @@ class Game:
             for y in range(max_row):
                 fdiag[x+y].append(self.grid[y][x])
                 bdiag[x-y-min_bdiag].append(self.grid[y][x])
-        self.gridDiagonalLeft = fdiag
-        self.gridDiagonalRight = bdiag
+        self.gridDiagonalLeft = fdiag[3:-3]
+        self.gridDiagonalRight = bdiag[3:-3]
 
     def checkWin(self):
         if self.gridFull():

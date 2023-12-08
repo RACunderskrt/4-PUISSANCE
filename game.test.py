@@ -74,22 +74,16 @@ def test_reverse_horizontal():
     assert TEST_VALUE.get_grid_horizontal() == bufGrid
 
 def test_reverse_diagonal_left():
-    TEST_VALUE.insert(0,P1)
-    TEST_VALUE.insert(0,P1)
-    TEST_VALUE.insert(0,P2)
+    TEST_VALUE.insert(4,P1)
+    TEST_VALUE.insert(4,P1)
+    TEST_VALUE.insert(4,P2)
     TEST_VALUE.reverse(0)
-    bufGrid = [[P2],
-               [None,P1],
-               [None, None, P1],
-               [None for _ in range(4)],
-               [None for _ in range(5)],
-               [None for _ in range(6)],
-               [None for _ in range(6)],
-               [None for _ in range(5)],
-               [None for _ in range(4)],
-               [None, None, None],
-               [None, None],
-               [None]]
+    bufGrid = [[None, None, None, None],
+               [P1, None, None, None, None],
+               [None, P1, None, None, None, None],
+               [None, None, P2, None, None, None],
+               [None, None, None, None, None],
+               [None, None, None, None]]
     assert TEST_VALUE.get_grid_diagonal()[0] == bufGrid
 
 def test_reverse_diagonal_right():
@@ -97,18 +91,12 @@ def test_reverse_diagonal_right():
     TEST_VALUE.insert(0,P1)
     TEST_VALUE.insert(0,P2)
     TEST_VALUE.reverse(0)
-    bufGrid = [[None],
-               [None,None],
-               [None, None, None],
-               [None, None, None, None],
+    bufGrid = [[None, None, None, None],
                [None, None, None, None, None],
                [None, None, None, None, None, None],
                [P2, None, None, None, None, None],
                [P1, None, None, None, None],
-               [P1, None, None, None],
-               [None, None, None],
-               [None, None],
-               [None]]
+               [P1, None, None, None]]
     assert TEST_VALUE.get_grid_diagonal()[1] == bufGrid
 
 def test_column_full():
