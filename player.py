@@ -15,6 +15,9 @@ class Player:
     def get_token(self):
         return self.token
     
+    def set_name(self,name):
+        self.name = name
+    
     def set_tokenFalse(self):
         self.token = False
 
