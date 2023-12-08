@@ -78,7 +78,7 @@ def play_game_solo():
 
     g1 = Game(p1, p2)
     grid = g1.get_grid()
-
+    testDiago(grid)
     Display.display(grid)
 
     while not g1.verify_all() and not g1.grid_full():
@@ -95,7 +95,7 @@ def play_game_solo():
         g1.insert(column, active_player)
         Display.animation(g1, column)
         Display.clear_line(9)
-        Display.display(grid)
+        
         if(len(inputVar)>1 and (inputVar[1] == 'R' or inputVar[1] == 'r')):
             g1.reverse(column)
             active_player.set_tokenFalse()
@@ -152,6 +152,25 @@ def ia_choice(g1, active_player): #The ia choose randomly the column and have a 
         inputVar += 'r'
     return inputVar, column
 
+def recomputeDiago(grid):
+    max_col = len(grid[0])
+    max_row = len(grid)
+    oui = []
+    fdiag = [[] for _ in range(max_row + max_col - 1)]
+    bdiag = [[] for _ in range(len(fdiag))]
+    min_bdiag = -max_row + 1
+    for x in range(max_col):
+        for y in range(max_row):
+            fdiag[x+y].append(grid[y][x])
+            bdiag[x-y-min_bdiag].append(grid[y][x])
+    print(fdiag, bdiag)
+
+def recomputeHori(grid):
+    hori = [[None for i in range(3)] for j in range(3)]
+    for i in range (len(grid)):
+        for j in range (len(grid[i])):
+            hori[j][i] = grid[i][j]
+    print(hori)
 
 def change_names():
     print("Select names for the Player A:")
@@ -163,19 +182,29 @@ def change_names():
     print("p1 :", p1," p2 :", p2)
 
 def main():
-    Display.menu()
+    recomputeDiago([
+        [1,2,3],
+        [4,5,6],
+        [7,8,9]
+    ])
+    recomputeHori([
+        [1,2,3],
+        [4,5,6],
+        [7,8,9]
+    ])
+    #Display.menu()
     #choix = Display.choiceGM2()+1
-    choix = Display.choiceGM()
-    match(choix):
-        case 1:
-            Display.clear_line(12)
-            play_game_solo()
-        case 2:
-            Display.clear_line(12)
-            play_game()
-        case 4:
-            Display.clear_line(6)
-            change_names()
+    #choix = Display.choiceGM()
+    #match(choix):
+    #    case 1:
+    #        Display.clear_line(12)
+    #        play_game_solo()
+    #    case 2:
+    #        Display.clear_line(12)
+    #        play_game()
+    #    case 4:
+    #        Display.clear_line(6)
+    #        change_names()
 
 
 

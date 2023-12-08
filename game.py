@@ -24,6 +24,12 @@ class Game:
     
     def get_grid_horizontal(self):
         return self.grid_horizontal
+
+    def get_grid_diagonal_left(self):
+        return self.grid_diagonal_left
+    
+    def get_grid_diagonal_right(self):
+        return self.grid_diagonal_right
     
     def set_grid(self, grid):
         self.grid = grid

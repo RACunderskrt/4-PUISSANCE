@@ -95,18 +95,17 @@ class Display:
             ui = keyboard.read_key(True)
             match ui:
                 case 'z':
-                    select = (select-1)%4
+                    select = (select-1)%5
                     Display.clear_line(6)
                     Display.changeMenu(select)
                     time.sleep(0.2)
                 case 's':
-                    select = (select+1)%4
+                    select = (select+1)%5
                     Display.clear_line(6)
                     Display.changeMenu(select)
                     time.sleep(0.2)
                 case 'q':
                     sys.exit()
-        Display.clear_line(13)
         return select
 
     def changeMenu(index):

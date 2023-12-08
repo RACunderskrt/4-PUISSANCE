@@ -38,6 +38,30 @@ def test_insert_horizontal():
                [None for _ in range(7)]]
     assert TEST_VALUE.get_grid_horizontal() == bufGrid
 
+def test_insert_diagonale_droite():
+    TEST_VALUE.insert(0,P1)
+    TEST_VALUE.insert(0,P1)
+    TEST_VALUE.insert(1,P1)
+    bufGrid = [['A',None,'A',None,None,None, None],
+            [None for _ in range(7)],
+            [None for _ in range(7)],
+            [None for _ in range(7)],
+            [None for _ in range(7)],
+            [None for _ in range(7)]]
+    assert TEST_VALUE.get_grid_diagonal_right() == bufGrid
+
+def test_insert_diagonale_gauche():
+    TEST_VALUE.insert(0,P1)
+    TEST_VALUE.insert(1,P1)
+    TEST_VALUE.insert(1,P1)
+    bufGrid = [['A',None,'A',None,None,None, None],
+            [None for _ in range(7)],
+            [None for _ in range(7)],
+            [None for _ in range(7)],
+            [None for _ in range(7)],
+            [None for _ in range(7)]]
+    assert TEST_VALUE.get_grid_diagonal_left() == bufGrid
+
 def test_verify():
     test_arr = [[None,None,None,None,1,1,1,1]]
     test_arr1 = [[None,None,None,1,None,1,1,1]]
@@ -59,6 +83,12 @@ def test_game():
     test_get_player1()
     test_get_player2()
     test_insert_vertical()
+    reset_grid()
+    test_insert_horizontal()
+    reset_grid()
+    test_insert_diagonale_droite()
+    reset_grid()
+    test_insert_diagonale_gauche()
     reset_grid()
     test_insert_horizontal()
     reset_grid()
