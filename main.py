@@ -154,8 +154,8 @@ def ia_choice(g1, active_player): #The ia choose randomly the column and have a 
 
 def main():
     Display.menu()
-    #choix = Display.choiceGM2()+1
-    choix = Display.choiceGM()
+    choix = Display.choiceGM2()+1
+    #choix = Display.choiceGM()
     match(choix):
         case 1:
             play_game_solo()
