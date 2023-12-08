@@ -12,10 +12,34 @@ class Game:
         self.gridDiagonalLeft = [[None for _ in range(i)] for i in range(4, 7)] + [[None for _ in range(i)] for i in range(6, 3, -1)]
         self.gridDiagonalRight = [[None for _ in range(i)] for i in range(4, 7)] + [[None for _ in range(i)] for i in range(6, 3, -1)]
     
-    def playGame(self, gm):
+    def get_player1(self):
+        return self.player1
+    
+    def get_player2(self):
+        return self.player2
+    
+    def get_grid(self):
+        return self.grid
+    
+    def get_grid_horizontal(self):
+        return self.gridHorizontal
+    
+    def get_grid_diagonal(self):
+        return self.gridDiagonalLeft, self.gridDiagonalRight
+    
+    def reset_grid(self):
+        self.grid = [[None for _ in range(6)] for _ in range(7)]
+        self.gridHorizontal = [[None for _ in range(7)] for _ in range(6)]
+        self.gridDiagonalLeft = [[None for _ in range(i)] for i in range(4, 7)] + [[None for _ in range(i)] for i in range(6, 3, -1)]
+        self.gridDiagonalRight = [[None for _ in range(i)] for i in range(4, 7)] + [[None for _ in range(i)] for i in range(6, 3, -1)]
+
+
+    def playGame(self, gm, p1Name, p2Name):
         print("Aligne 4 jetons et la victoire est à toi !", end="\n\n")
         p1 = self.player1
         p2 = self.player2
+        p1.set_name(p1Name)
+        p2.set_name(p2Name)
         activePlayer = None
         input = None
         colAI = None
@@ -89,8 +113,35 @@ class Game:
         if 0 <= indexRight < 6:
             self.gridDiagonalRight[indexRight][row if indexRight < 4 else col] = id
     
-    def reverse(self, col):
-        return
+    def reverse(self, col): 
+        if(self.grid[col].count(None)): 
+            x = self.grid[col].index(None)
+        else:
+            x = 6 #if the column is full we reverse all the column
+        bufArr = self.grid[col][0:x]
+        self.grid[col][0:x] = bufArr[::-1]
+        self.reverseHorizontal()
+        self.reverseDiagonal()
+
+    def reverseHorizontal(self):
+        bufGridHorizontal = [[None for i in range(7)] for j in range(6)]
+        for i in range (len(self.grid)):
+            for j in range (len(self.grid[i])):
+                bufGridHorizontal[j][i] = self.grid[i][j]
+        self.gridHorizontal = bufGridHorizontal
+
+    def reverseDiagonal(self):
+        max_col = len(self.grid[0])
+        max_row = len(self.grid)
+        fdiag = [[] for _ in range(max_row + max_col - 1)]
+        bdiag = [[] for _ in range(len(fdiag))]
+        min_bdiag = -max_row + 1
+        for x in range(max_col):
+            for y in range(max_row):
+                fdiag[x+y].append(self.grid[y][x])
+                bdiag[x-y-min_bdiag].append(self.grid[y][x])
+        self.gridDiagonalLeft = fdiag
+        self.gridDiagonalRight = bdiag
 
     def checkWin(self):
         if self.gridFull():

@@ -1,4 +1,4 @@
-import re, copy, time, threading
+import re, copy, time, threading, sys, keyboard
 
 class Display:
     ANIMATION_RATE = 0.2
@@ -106,9 +106,49 @@ class Display:
         Display.clearLine(11)
         return gm
     
+    def choiceGM2():
+        select = 0
+        Display.changeMenu(select)
+        ui = None 
+        while (ui != 'space'):
+            ui = keyboard.read_key(True)
+            match ui:
+                case 'z':
+                    select = (select-1)%5
+                    Display.clearLine(7)
+                    Display.changeMenu(select)
+                    time.sleep(0.2)
+                case 's':
+                    select = (select+1)%5
+                    Display.clearLine(7)
+                    Display.changeMenu(select)
+                    time.sleep(0.2)
+                case 'q':
+                    sys.exit()
+        Display.clearLine(14)
+        return str(select+1)
+    
+    def changeMenu(index):
+        print("          ", '\u2192' if index == 0 else " ", "1. Singleplayer")
+        print("          ", '\u2192' if index == 1 else " ", "2. Multiplayer")
+        print("          ", '\u2192' if index == 2 else " ", "3. No gaming")
+        print("          ", '\u2192' if index == 3 else " ", "4. Change Names")
+        print("          ", '\u2192' if index == 4 else " ", "5. Quit")
+        print()
+        print("z: up | s: down | space: select | q: quit")
+    
     def launchGame():
         Display.menu()
-        return Display.choiceGM()
+        return Display.choiceGM2()
+    
+    def change_names():
+        print("Select names for the Player A:")
+        p1 = input()
+        Display.clearLine(2)
+        print("Select names for the Player B:")
+        p2 = input()
+        Display.clearLine(2)
+        return p1, p2
 
 class Color:
     PLAYER_A = '\033[91m' # red
