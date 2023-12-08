@@ -4,18 +4,6 @@ from game import Game
 import sys
 
 def main():
-    # grid = [["A", "B", "A", "B", "A", "B"],
-    #         ["B", "A", "B", "A", "B", "A"],
-    #         ["A", "B", "A", "B", "A", "B"],
-    #         ["B", "B", "B", "A", "A", None],
-    #         ["A", "B", "A", "B", "A", "B"],
-    #         ["B", "A", "B", "A", "B", "A"],
-    #         ["A", "B", "A", "B", "A", "B"]]
-    # Display.displayGrid(grid)
-    # Display.displayGrid(grid)
-    # Display.animationReverse(grid, 3)
-    # game = Game()
-    # game.playGame(Display.launchGame())
     p1Name = "Thomas"
     p2Name = "Alexandre"
     gm = "10"

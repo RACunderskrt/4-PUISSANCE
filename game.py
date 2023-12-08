@@ -1,7 +1,7 @@
 from player import Player
 from display import Display, Color
 
-import re, random
+import re, random, time
 
 class Game:
     def __init__(self):
@@ -33,9 +33,8 @@ class Game:
         self.gridDiagonalLeft = [[None for _ in range(i)] for i in range(4, 7)] + [[None for _ in range(i)] for i in range(6, 3, -1)]
         self.gridDiagonalRight = [[None for _ in range(i)] for i in range(4, 7)] + [[None for _ in range(i)] for i in range(6, 3, -1)]
 
-
+    # grosse fonction qui gère le déroulement d'une partie
     def playGame(self, gm, p1Name, p2Name):
-        print("Aligne 4 jetons et la victoire est à toi !", end="\n\n")
         p1 = self.player1
         p2 = self.player2
         p1.set_name(p1Name)
@@ -44,22 +43,29 @@ class Game:
         input = None
         colAI = None
         error = 0
+        AI_WAITING_TIME = 0.2
 
-        Display.displayGrid(self.grid)
         while not self.checkWin()[0]:
             activePlayer = p2 if activePlayer == p1 else p1
             match(gm):
                 case "1":
+                    print("Aligne 4 jetons et la victoire est à toi !", end="\n\n")
+                    Display.displayGrid(self.grid)
                     if activePlayer == p1:
                         if colAI != None:
                             print("The AI played in " + str(colAI))
                         print("Player " + activePlayer.name, end='')
                     else:
                         print("The AI is playing... ", end='')
+                        time.sleep(AI_WAITING_TIME)
                 case "2":
+                    print("Aligne 4 jetons et la victoire est à toi !", end="\n\n")
+                    Display.displayGrid(self.grid)
                     print("Player " + activePlayer.name, end='')
                 case "3":
-                    print("L'AI joue..." if colAI == None else "L'IA a joué en " + str(colAI + 1), end='')
+                    print("L'AI joue..." if colAI == None else "L'IA a joué en " + str(colAI + 1), end="\n\n")
+                    Display.displayGrid(self.grid)
+                    time.sleep(AI_WAITING_TIME)
             print(" - Reverse token available" if activePlayer.token else "")
             match(gm):
                 case "1":
@@ -81,7 +87,7 @@ class Game:
                 activePlayer.set_tokenFalse()
                 Display.animationReverse(self.grid, col)
                 Display.clearLine(9)
-            Display.displayGrid(self.grid)
+            Display.clearLine(2)
         result = self.checkWin()
         if result[1] == "draw":
             print("Draw")
@@ -93,13 +99,18 @@ class Game:
                     print("Player " + (p1.name if result[1] == p1.id else p2.name) + " won")
                 case "3":
                     print("The AI " + ("number 1" if result[1] == p1.id else "number 2") + " won")
-    
+        print()
+        Display.displayGrid(self.grid)
+
+    # vérifie si la colonne est pleine
     def columnFull(self, col):
         return self.grid[col].count(None) <= 0
-    
+
+    # vérifie si la grille est pleine
     def gridFull(self):
         return all([self.columnFull(i) for i in range(7)])
-    
+
+    # insère un jeton dans les grilles
     def insert(self, col, id):
         if self.columnFull(col):
             raise Exception("Column " + str(col) + " is full")
@@ -112,7 +123,8 @@ class Game:
             self.gridDiagonalLeft[indexLeft][row if indexLeft < 4 else 6 - col] = id
         if 0 <= indexRight < 6:
             self.gridDiagonalRight[indexRight][row if indexRight < 4 else col] = id
-    
+
+    # inverse les jetons dans la colonne
     def reverse(self, col): 
         if(self.grid[col].count(None)): 
             x = self.grid[col].index(None)
@@ -123,6 +135,7 @@ class Game:
         self.reverseHorizontal()
         self.reverseDiagonal()
 
+    # inverse les jetons dans la colonne (grille horizontale)
     def reverseHorizontal(self):
         bufGridHorizontal = [[None for i in range(7)] for j in range(6)]
         for i in range (len(self.grid)):
@@ -130,6 +143,7 @@ class Game:
                 bufGridHorizontal[j][i] = self.grid[i][j]
         self.gridHorizontal = bufGridHorizontal
 
+    # inverse les jetons dans la colonne (grille diagonale)
     def reverseDiagonal(self):
         max_col = len(self.grid[0])
         max_row = len(self.grid)
@@ -143,6 +157,7 @@ class Game:
         self.gridDiagonalLeft = fdiag[3:-3]
         self.gridDiagonalRight = bdiag[3:-3]
 
+    # vérifie si un joueur a gagné
     def checkWin(self):
         if self.gridFull():
             return True, "draw"
@@ -153,14 +168,15 @@ class Game:
                     return True, result[1]
             return False, None
 
-        
+    # vérifie si un joueur a gagné (dans une grille)
     def check(self, grid):
         for arr in grid:
             for i in range(len(arr) - 3):
                 if arr[i] == arr[i + 1] == arr[i + 2] == arr[i + 3] != None:
                     return True, arr[i]
         return False, None
-    
+
+    # vérifie si un input est valide
     def testInput(self, activePlayer):
         choice = ''
         col = -1
@@ -194,6 +210,7 @@ class Game:
 
         return choice, None, error
 
+    # choix de l'IA
     def aiChoice(self, activePlayer):
         non_full_columns = [i for i in range(len(self.grid)) if not self.columnFull(i)]
 

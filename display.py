@@ -3,12 +3,14 @@ import re, copy, time, threading, sys, keyboard
 class Display:
     ANIMATION_RATE = 0.2
 
+    # supprime n lignes
     def clearLine(n=1):
         LINE_UP = '\033[1A'
         LINE_CLEAR = '\x1b[2K'
         for _ in range(n):
             print(LINE_UP, end=LINE_CLEAR)
 
+    # affiche le plateau de jeu
     def displayGrid(grid):
         for col in range(len(grid[0]) - 1, -1, -1):
             print(Color.GRID + "|" + Color.END, end="")
@@ -27,7 +29,8 @@ class Display:
         print(Color.GRID + "----------------------" + Color.END)
         print(" １ ２ ３ ４ ５ ６ ７")
         print()
-    
+
+    # effectue l'animation de chute
     def animationDown(grid, col):
         if grid[col].count(None) <= 0:
             Display.displayGrid(grid)
@@ -47,6 +50,7 @@ class Display:
             Display.clearLine(9)
             Display.displayGrid(bufGrid)
 
+    # effectue l'animation de retournement
     def animationReverse(grid, col):
         # top = grid[col].index(None) - 1 if grid[col].count(None) > 0 else 5
         # bufGrid = copy.deepcopy(grid)
@@ -60,6 +64,7 @@ class Display:
         for i in range(top // 2 + top % 2):
             bufGrid[col][i], bufGrid[col][top - i] = bufGrid[col][top - i], bufGrid[col][i]
         bufGrid2 = copy.deepcopy(grid)
+        Display.displayGrid(bufGrid2)
         for i in range(top // 2 + top % 2):
             time.sleep(Display.ANIMATION_RATE)
             bufGrid2[col][i] = None
@@ -73,6 +78,7 @@ class Display:
             Display.clearLine(9)
             Display.displayGrid(bufGrid2)
 
+    # affiche le menu
     def displayMenu():
         print(Color.GRID + "               Press Enter" + Color.END)
         time.sleep(0.5)
@@ -81,10 +87,12 @@ class Display:
         Display.clearLine()
         time.sleep(0.5)
 
+    # attend l'appui sur la touche entrée
     def inputKb(value):
         input()
         value.append(True)
 
+    # affiche le menu principal
     def menu():
         menu = open("menu.txt", "r").read()
         print(menu)
@@ -95,7 +103,8 @@ class Display:
             Display.displayMenu()
         Display.clearLine()
 
-    def choiceGM():
+    # affiche le menu de choix du mode de jeu (legacy)
+    def choiceGM_legacy():
         choix = open("choixGM.txt", "r").read()
         print(choix)
         while True:
@@ -105,7 +114,8 @@ class Display:
                 break
         Display.clearLine(11)
         return gm
-    
+
+    # affiche le menu de choix du mode de jeu
     def choiceGM2():
         select = 0
         Display.changeMenu(select)
@@ -127,7 +137,8 @@ class Display:
                     sys.exit()
         Display.clearLine(14)
         return str(select+1)
-    
+
+    # affiche le menu de choix du mode de jeu
     def changeMenu(index):
         print("          ", '\u2192' if index == 0 else " ", "1. Singleplayer")
         print("          ", '\u2192' if index == 1 else " ", "2. Multiplayer")
@@ -136,11 +147,13 @@ class Display:
         print("          ", '\u2192' if index == 4 else " ", "5. Quit")
         print()
         print("z: up | s: down | space: select | q: quit")
-    
+
+    # lance les menus de debut de jeu
     def launchGame():
         Display.menu()
         return Display.choiceGM2()
-    
+
+    # change les noms des joueurs
     def change_names():
         print("Select names for the Player A:")
         p1 = input()

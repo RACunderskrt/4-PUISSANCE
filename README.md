@@ -1,4 +1,4 @@
-# POWER 4
+# 4 PUISSANCE
 
 Created by POIX Alexandre and HUMBERT Thomas.
 With the library keyboard made by Boppreh 
@@ -7,7 +7,7 @@ https://github.com/boppreh/keyboard
 
 ## Objective of this project
 
-Create a power 4 in python completly portable.
+Create a connect 4 in python completly portable.
 
 ## Goals
 
