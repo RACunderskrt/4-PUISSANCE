@@ -8,7 +8,8 @@ https://github.com/boppreh/keyboard
 ## Objective of this project
 
 Create a connect 4 in python completly portable.
-
+<br>
+Warning: on Windows10 there are some issues with the display.
 ## Goals
 
 - line up 4 pawns in a row, column or diagonal
