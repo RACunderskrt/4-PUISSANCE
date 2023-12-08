@@ -15,6 +15,7 @@ def main():
             case "5":
                 sys.exit()
     Game().playGame(gm, p1Name, p2Name)
+    Display.end()
 
 if __name__ == "__main__":
     main()

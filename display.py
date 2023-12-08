@@ -103,6 +103,24 @@ class Display:
             Display.displayMenu()
         Display.clearLine()
 
+    # affiche le message de fin qui clignote
+    def end():
+        a_list = []
+        t = threading.Thread(target=Display.inputKb, args=(a_list,))
+        t.start()
+        while not a_list:
+            Display.displayEnd()
+        Display.clearLine()
+    
+    # affiche le message de fin
+    def displayEnd():
+        print(Color.GRID + "Press Enter to leave the program." + Color.END)
+        time.sleep(0.5)
+        Display.clearLine()
+        print("")
+        Display.clearLine()
+        time.sleep(0.5)
+
     # affiche le menu de choix du mode de jeu (legacy)
     def choiceGM_legacy():
         choix = open("choixGM.txt", "r").read()
