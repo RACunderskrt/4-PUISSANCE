@@ -152,15 +152,30 @@ def ia_choice(g1, active_player): #The ia choose randomly the column and have a 
         inputVar += 'r'
     return inputVar, column
 
+
+def change_names():
+    print("Select names for the Player A:")
+    p1 = input()
+    Display.clear_line(2)
+    print("Select names for the Player B:")
+    p2 = input()
+    Display.clear_line(2)
+    print("p1 :", p1," p2 :", p2)
+
 def main():
     Display.menu()
-    choix = Display.choiceGM2()+1
-    #choix = Display.choiceGM()
+    #choix = Display.choiceGM2()+1
+    choix = Display.choiceGM()
     match(choix):
         case 1:
+            Display.clear_line(12)
             play_game_solo()
         case 2:
+            Display.clear_line(12)
             play_game()
+        case 4:
+            Display.clear_line(6)
+            change_names()
 
 
 

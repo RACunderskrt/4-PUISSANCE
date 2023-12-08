@@ -72,13 +72,13 @@ class Display:
         print(menu)
         print(choix)
         while True: #Until the right input, the player need to enter a value
+            gm = 0
             try:
                 gm = int(input())
             except ValueError:
                 None
             Display.clear_line()
-            if(1 <= gm <= 4 ):
-                Display.clear_line(12)
+            if(1 <= gm <= 5 ):
                 return gm
 
 
@@ -113,7 +113,8 @@ class Display:
         print("          ", '\u2192' if index == 0 else " ", "1. Singleplayer")
         print("          ", '\u2192' if index == 1 else " ", "2. Multiplayer")
         print("          ", '\u2192' if index == 2 else " ", "3. No gaming")
-        print("          ", '\u2192' if index == 3 else " ", "4. Quit")
+        print("          ", '\u2192' if index == 3 else " ", "4. Change Names")
+        print("          ", '\u2192' if index == 4 else " ", "5. Quit")
         print()
         print("z: up | s: down | space: select | q: quit")
 

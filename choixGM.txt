@@ -1,4 +1,5 @@
                1. Singleplayer
                2. Multiplayer
                3. No gaming
-               4. Quit
+               4. Change Names
+               5. Quit
