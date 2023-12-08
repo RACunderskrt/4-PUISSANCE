@@ -1,19 +1,25 @@
-class Player:
-    def __init__(self, char):
-        self.char = char #Qualify the player by a char
-        self.token = True #Each player got 1 reverse token
+import re
 
-    def get_char(self):
-        return self.char
+class Player:
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
+        self.token = True
+    
+    def get_name(self):
+        return self.name
+    
+    def get_id(self):
+        return self.id
     
     def get_token(self):
         return self.token
     
     def set_tokenFalse(self):
         self.token = False
-    
+
     def set_tokenTrue(self):
         self.token = True
-    
-    def verify_token_error(self, input): #Check if the input from the player is valid and if he still have a reverse token left
-        return len(input)>1 and (input[1] == 'R' or input[1] == 'r') and not self.get_token()
+
+    def verifyToken(self, input):
+        return len(input) > 1 and re.search("[rR]",input[1]) and not self.get_token()
