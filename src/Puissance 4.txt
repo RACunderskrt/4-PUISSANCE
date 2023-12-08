@@ -1,0 +1,29 @@
+Puissance 4
+
+Grille : 7 x 6
+
+A B C D E F G
+O O O O O O O
+O O O O O O O
+O O O O O O O
+O O O O O O O
+O O O O O O O
+O O O O O O O
+
+Notion de colonne ou on joue
+Quand il met le jeton, il tombe au plus bas possible : gravité !!!
+
+Règle de on gagne :
+4 jetons alignés (verticalement, horizontalement ou en diagonale)
+
+Cas du match nul : la grille est complète, aucun gagnant, le jeu s'arrête
+
+Rendu 08/12/2023 23h59
+
+Bonus :
+Reverse d'une colonne
+Reverse de colonne : la gravité se réapplique
+Bonus 2 :
+Random sur le reverse de la colonne
+Bonus 3 :
+Limiter le nombre de reverse possible

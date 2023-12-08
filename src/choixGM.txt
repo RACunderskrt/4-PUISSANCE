@@ -1,0 +1,3 @@
+         1. Singleplayer (PL vs AI)
+         2. Multiplayer  (PL vs PL)
+         3. Noplayer     (AI vs AI)
